@@ -25,19 +25,25 @@ class Currencies:
     def get_info(self):
         with app.app_context():
 
+            response = {}
+
             params = {
-                'q': ','.join(self.currencies),
+                'q': '',
                 'compact': 'ultra',
                 'apiKey': self.api_key
             }
 
-            r = requests.get('{}/api/v7/convert'.format(self.base_url), params=params, headers=headers)
+            for curr in self.currencies:
 
-            if r.status_code != 200:
-                # do some db logic
-                print('hyi')
+                params['q'] = curr
+                r = requests.get('{}/api/v7/convert'.format(self.base_url), params=params, headers=headers)
+                response[curr] = r.json()[curr]
 
-            response = r.text
+            # if r.status_code != 200:
+            #     # do some db logic
+            #     print('hyi')
+
+            # response = r.text
 
             currencies = Currency_model(datetime.utcnow(), json.dumps(response), r.status_code)
 

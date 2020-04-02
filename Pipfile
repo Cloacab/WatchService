@@ -16,6 +16,7 @@ flask-sqlalchemy = "*"
 flask-migrate = "*"
 migrate = "*"
 sqlalchemy-migrate = "*"
+gunicorn = "*"
 
 [dev-packages]
 
