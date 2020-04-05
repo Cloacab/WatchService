@@ -1,11 +1,12 @@
 import json
-import time
-import requests
-from app import app, db
 from datetime import datetime
-from app.models import Covid_model, Currency_model
+
+import requests
 from bs4 import BeautifulSoup
 from flask import jsonify
+
+from app import app, db
+from app.models import Covid_model, Currency_model
 
 headers = {
     'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
@@ -39,21 +40,10 @@ class Currencies:
                 r = requests.get('{}/api/v7/convert'.format(self.base_url), params=params, headers=headers)
                 response[curr] = r.json()[curr]
 
-            # if r.status_code != 200:
-            #     # do some db logic
-            #     print('hyi')
-
-            # response = r.text
-
             currencies = Currency_model(datetime.utcnow(), json.dumps(response), r.status_code)
 
             db.session.add(currencies)
             db.session.commit()
-
-            # print(response)
-
-            with open('currencies.txt', 'a') as currencies_file:
-                currencies_file.write(time.asctime(time.localtime(time.time())) + ' ' + str(response) + '\n')
 
             return response
 
@@ -83,8 +73,5 @@ class Covid:
 
             db.session.add(covid)
             db.session.commit()
-
-            with open('covid.txt', 'a') as covid_file:
-                covid_file.write(time.asctime(time.localtime(time.time())) + ' ' + json.dumps(response) + '\n')
 
             return jsonify(response)
