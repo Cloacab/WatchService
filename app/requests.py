@@ -25,7 +25,6 @@ class Currencies:
 
     def get_info(self):
         with app.app_context():
-
             response = {}
 
             params = {
@@ -44,7 +43,6 @@ class Currencies:
 
             db.session.add(currencies)
             db.session.commit()
-
             return response
 
 

@@ -33,10 +33,6 @@ def add_scheduler():
     scheduler = BackgroundScheduler(jobstores=jobstores, executors=executors, job_defaults=job_defaults, timezone=utc)
 
     scheduler.start()
-    # scheduler.remove_all_jobs()
-
-    # scheduler.add_job(Covid().get_info, 'interval', minutes=REQUEST_INTERVAL, id='covid_job')
-    # scheduler.add_job(Currencies().get_info, 'interval', minutes=REQUEST_INTERVAL, id='currencies_job')
 
     scheduler.reschedule_job(job_id='covid_job', trigger='interval', minutes=app.config['REQUEST_INTERVAL'])
     scheduler.reschedule_job(job_id='currencies_job', trigger='interval', minutes=app.config['REQUEST_INTERVAL'])
