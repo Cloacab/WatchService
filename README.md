@@ -1,3 +1,3 @@
 # WatchService
 ## Desc:
-### Service for requests agrregation from smart watches 
+### Service for requests aggregation from smart watches 
