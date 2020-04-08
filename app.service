@@ -1,0 +1,16 @@
+# /etc/systemd/system/app.service
+[Unit]
+Description=Gunicorn instance to serve app
+After=network.target
+
+[Service]
+User=app
+Group=apache
+WorkingDirectory=/home/app/WatchService
+Environment="PATH=/home/app/.local/share/virtualenvs/WatchService-Tlp3wTke/bin"
+ExecStart=/home/app/.local/share/virtualenvs/WatchService-Tlp3wTke/bin/gunicorn --workers 3 app:app
+ExecReload=/bin/kill -s HUP $MAINPID
+ExecStop=/bin/kill -s TERM $MAINPID
+
+[Install]
+WantedBy=multi-user.target

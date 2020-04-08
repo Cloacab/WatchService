@@ -4,4 +4,5 @@ currencies.txt
 app.db
 jobs.sqlite
 .idea/
+app/__pycache__/
 
