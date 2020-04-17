@@ -1,7 +1,7 @@
 from app import db
 
 
-class Covid_model(db.Model):
+class Covid(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     date = db.Column(db.DateTime)
     body = db.Column(db.String)
@@ -13,7 +13,7 @@ class Covid_model(db.Model):
         self.status = status
 
 
-class Currency_model(db.Model):
+class Currency(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     date = db.Column(db.DateTime)
     body = db.Column(db.String)

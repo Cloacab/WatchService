@@ -1,4 +1,4 @@
-# /etc/systemd/system/app.service
+ё# /etc/systemd/system/app.service
 [Unit]
 Description=Gunicorn instance to serve app
 After=network.target
